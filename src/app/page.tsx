@@ -1,11 +1,17 @@
-import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { data, error } = await supabase.auth.getSession();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4">
-      <h1 className="text-4xl font-bold">Blog App</h1>
+    <main className="flex min-h-screen items-center justify-center">
+      <div>
+        <h1 className="text-4xl font-bold">Blog App 🚀</h1>
 
-      <Button>Everything Working 🚀</Button>
+        <p className="mt-4">
+          {error ? "Connection Failed ❌" : "Supabase Connected ✅"}
+        </p>
+      </div>
     </main>
   );
 }
