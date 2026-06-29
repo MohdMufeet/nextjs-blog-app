@@ -1,7 +1,21 @@
-export default function DashboardPage() {
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+
+export default async function DashboardPage() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-3xl font-bold">Dashboard</h1>
-    </main>
+    <div>
+      <h1>Dashboard</h1>
+      <p>Welcome, {user.email}</p>
+    </div>
   );
 }

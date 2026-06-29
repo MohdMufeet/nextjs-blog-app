@@ -16,6 +16,13 @@ export async function signup(formData: FormData): Promise<void> {
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
+//   const { error } = await supabase.auth.signUp({
+//   email,
+//   password,
+//   options: {
+//     emailRedirectTo: `${window.location.origin}/auth/callback`,
+//   },
+// });
 
   if (error) {
     redirect(`/signup?error=${encodeURIComponent(error.message)}`);
