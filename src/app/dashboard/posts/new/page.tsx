@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createPost } from "./actions";
 
 export default async function NewPostPage() {
   const supabase = await createClient();
@@ -30,7 +31,7 @@ console.log("Error:", error);
         Create Post
       </h1>
 
-      <form className="space-y-4">
+     <form action={createPost} className="space-y-4">
         <input
           type="text"
           name="title"
