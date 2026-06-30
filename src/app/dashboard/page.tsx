@@ -20,6 +20,12 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
+    const { data: posts } = await supabase
+  .from("posts")
+  .select("*")
+  .eq("author_id", user.id)
+  .order("created_at", { ascending: false });
+
   return (
     <main className="min-h-screen bg-gray-100">
       <div className="max-w-5xl mx-auto p-6">
@@ -91,14 +97,59 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-<div className="mt-6">
-  <Link
-    href="/dashboard/posts/new"
-    className="bg-black text-white px-4 py-2 rounded"
-  >
-    Create New Post
-  </Link>
+        <div className="mt-10">
+  <div className="flex items-center justify-between mb-6">
+    <h2 className="text-2xl font-bold">My Posts</h2>
+
+    <Link
+      href="/dashboard/posts/new"
+      className="bg-black text-white px-4 py-2 rounded"
+    >
+      New Post
+    </Link>
+  </div>
+
+  {posts?.length === 0 ? (
+    <p>No posts yet.</p>
+  ) : (
+    <div className="space-y-4">
+      {posts?.map((post) => (
+        <div
+          key={post.id}
+          className="border rounded-lg p-5 flex justify-between items-center"
+        >
+          <div>
+            <h3 className="font-semibold text-lg">
+              {post.title}
+            </h3>
+
+            <p className="text-sm text-gray-500">
+              {post.status}
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+            <button className="text-blue-600">
+              <Link
+  href={`/dashboard/posts/${post.id}/edit`}
+  className="text-blue-600 hover:underline"
+>
+  Edit
+</Link>
+              
+            </button>
+
+            <button className="text-red-600">
+              Delete
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
 </div>
+
+
 
         {/* Future Sections */}
         <div className="grid md:grid-cols-3 gap-6 mt-8">
