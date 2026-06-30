@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import LogoutButton from "@/components/auth/logout-button";
 import Link from "next/link";
+import DeleteButton from "@/components/auth/delete-button";
+import { deletePost } from "./actions";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -139,9 +141,10 @@ export default async function DashboardPage() {
               
             </button>
 
-            <button className="text-red-600">
-              Delete
-            </button>
+            <DeleteButton
+              action={deletePost}
+              id={post.id}
+            />
           </div>
         </div>
       ))}
