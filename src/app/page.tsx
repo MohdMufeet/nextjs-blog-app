@@ -34,7 +34,7 @@ export default async function HomePage() {
               </p>
 
               <Link
-                href={`/posts/${post.id}`}
+                href={`/posts/${post.slug}`}
                 className="inline-block mt-5 text-blue-600 hover:underline"
               >
                 Read More →
