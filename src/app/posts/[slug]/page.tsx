@@ -16,7 +16,7 @@ export default async function PostPage({ params }: Props) {
     .from("posts")
     .select("*")
     .eq("slug", slug)
-    .eq("status", "published")
+    // .eq("status", true)
     .single();
 
   if (!post) {
