@@ -14,6 +14,7 @@ export async function createPost(formData: FormData) {
     redirect("/login");
   }
 
+  
   const title = formData.get("title") as string;
   const slug = formData.get("slug") as string;
   const content = formData.get("content") as string;

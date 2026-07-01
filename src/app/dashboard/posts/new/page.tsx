@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createPost } from "./actions";
+import { generateSlug } from "@/lib/slug";
 
 export default async function NewPostPage() {
   const supabase = await createClient();
