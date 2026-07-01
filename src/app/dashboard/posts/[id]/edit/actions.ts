@@ -25,7 +25,7 @@ export async function updatePost(formData: FormData) {
     .update({
       title,
       slug,
-      content,
+      // content,
       published: true,
     })
     .eq("id", id)
